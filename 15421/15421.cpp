@@ -1,14 +1,13 @@
 #include <cstdio>
 
 int n, m, r;
-int x[50], y[50];
-int a[15], b[15], c[15];
+double x[50], y[50];
+double a[15], b[15], c[15];
 int chk[50];
 
 void init();
 int count_piece();
 bool divide_piece();
-
 
 int main(void){
 	init();
@@ -20,31 +19,78 @@ int main(void){
 
 void init(){
 	scanf("%d %d %d", &n, &m, &r);
-	for(int i=0; i<n; i++)scanf("%d %d", x+i, y+i);
-	for(int i=0; i<m; i++)scanf("%d %d %d", a+i, b+i, c+i);
+	for(int i=0; i<n; i++)scanf("%lf %lf", x+i, y+i);
+	for(int i=0; i<m; i++)scanf("%lf %lf %lf", a+i, b+i, c+i);
 	for(int i=0; i<n; i++)chk[i]=0;
 }
 
 int count_piece(){
-	
+	int result = 1;
+	double xarr[15], yarr[15];
+	for(int i=0; i<m; i++){
+		int cnt = 0;
+		double tx, ty;
+		for(int j=0; j<i; j++){
+			if(a[i]==0){
+				ty = c[i]/b[i]*(-1);
+				if(a[j]==0) continue;
+				else if(b[j]==0) tx = c[j]/a[j]*(-1);
+				else tx = (b[j]*ty+c[j])/a[j]*(-1);
+			}
+			else if(b[i]==0){
+				tx = c[i]/a[i]*(-1);
+				if(b[j]==0) continue;
+				else if(a[j]==0) ty = c[j]/b[i]*(-1);
+				else ty = (a[j]*tx+c[j])/b[j]*(-1);
+			}
+			else{
+				if(a[j]==0){
+					ty = c[j]/b[j]*(-1);
+					tx = (b[i]*ty+c[i])/a[i]*(-1);
+				}
+				else if(b[j]==0){
+					tx = c[j]/a[j]*(-1);
+					ty = (a[i]*tx+c[i])/b[i]*(-1);
+				}
+				else{
+					if(a[i]*b[j] == a[j]*b[i]) continue;
+					ty = (a[i]*c[j] - a[j]*c[i])/(a[j]*b[i] - a[i]*b[j]);
+					tx = (b[i]*ty+c[i])/a[i]*(-1);
+				}
+			}
+			bool dup = false;
+			for(int k=0; k<cnt; k++){
+				if(xarr[k] == tx && yarr[k] == ty){
+					dup = true;
+					break;
+				}
+			}
+			if(!dup && (tx*tx + ty*ty) < (double)r*r) {
+				xarr[cnt] = tx;
+				yarr[cnt] = ty;
+				cnt++;
+			}
+		}
+		result += cnt + 1;
+	}
 	return result;
 }
 
 bool divide_piece(){
 	for(int i=0; i<m; i++){
 		if(a[i] == 0){
-			double t = (double)c[i]/b[i]*(-1);	
+			double t = c[i]/b[i]*(-1);	
 			for(int j=0; j<n; j++)
 				if(y[j] > t)chk[j] += 1<<i;
 		}
 		else if(b[i] == 0){
-			double t = (double)c[i]/a[i]*(-1);
+			double t = c[i]/a[i]*(-1);
 			for(int j=0; j<n; j++)
 				if(x[j] > t)chk[j] += 1<<i;
 		}
 		else{
 			for(int j=0; j<n; j++){
-				double t = ((double)b[i]*y[j]+c[i])/a[i]*(-1);
+				double t = (b[i]*y[j]+c[i])/a[i]*(-1);
 				if(x[j] > t)chk[j] += 1<<i;
 			}
 		}
