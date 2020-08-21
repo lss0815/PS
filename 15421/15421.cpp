@@ -65,6 +65,7 @@ int count_piece(){
 					break;
 				}
 			}
+			printf("%lf %lf\n", tx, ty);
 			if(!dup && (tx*tx + ty*ty) < (double)r*r) {
 				xarr[cnt] = tx;
 				yarr[cnt] = ty;
