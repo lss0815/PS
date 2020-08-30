@@ -8,6 +8,7 @@ int chk[50];
 void init();
 int count_piece();
 bool divide_piece();
+double abs_val(double);
 
 int main(void){
 	init();
@@ -60,12 +61,11 @@ int count_piece(){
 			}
 			bool dup = false;
 			for(int k=0; k<cnt; k++){
-				if(xarr[k] == tx && yarr[k] == ty){
+				if(abs_val(xarr[k] - tx) <= 0.0002 && abs_val(yarr[k] - ty) <= 0.0002){
 					dup = true;
 					break;
 				}
 			}
-			printf("%lf %lf\n", tx, ty);
 			if(!dup && (tx*tx + ty*ty) < (double)r*r) {
 				xarr[cnt] = tx;
 				yarr[cnt] = ty;
@@ -110,3 +110,7 @@ bool divide_piece(){
 	return suc;
 }
 
+double abs_val(double t){
+	if(t < 0) t *= (-1);
+	return t;
+}
