@@ -1,0 +1,4 @@
+알고 스터디 with Joo 1일차
+https://programmers.co.kr/learn/courses/30/lessons/43163
+노드 안짜고 구현했어야 함.
+그래프 보면 바로 노드 구현하지 말고 필요성에 대해 고민하고 구현할 것.
