@@ -33,7 +33,7 @@ int calculateMinFinalPrice(int state, int lastOwner){
 }
 
 int main(void){
-    char tradePriceString[15][17];
+    char tradePriceString[15][16];
     scanf("%d", &artistNum);
     for(int i=0; i<artistNum; i++){
         scanf("%s", tradePriceString[i]);
