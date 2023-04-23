@@ -2,8 +2,8 @@
 #include <vector>
 #include <algorithm>
 
-#define ZERO_INCLUDE_MAX_SIZE 200001
-#define MAX_SIZE 200000
+#define ZERO_INCLUDE_MAX_SIZE 100001
+#define MAX_SIZE 100000
 
 int n, m[ZERO_INCLUDE_MAX_SIZE], k;
 int psum[ZERO_INCLUDE_MAX_SIZE];
