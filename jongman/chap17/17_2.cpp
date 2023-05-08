@@ -10,8 +10,8 @@ int psum[ZERO_INCLUDE_MAX_SIZE];
 int sub_max[ZERO_INCLUDE_MAX_SIZE];
 
 // k related
-int prev[MAX_SIZE];
-int64_t count[MAX_SIZE];
+int prev[kMaxSize];
+int64_t count[kMaxSize];
 
 void GetInput() {
     scanf("%d %d", &n, &k);
